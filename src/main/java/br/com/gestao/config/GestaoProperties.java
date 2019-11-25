@@ -10,4 +10,5 @@ import org.springframework.stereotype.Component;
 public class GestaoProperties {
 
     private String teste = "VALOR PADRAO";
+    private String teste1 = "Valor de teste 1";
 }
