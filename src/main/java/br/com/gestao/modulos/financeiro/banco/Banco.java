@@ -3,7 +3,6 @@ package br.com.gestao.modulos.financeiro.banco;
 import br.com.gestao.utils.IdentificadorComum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
