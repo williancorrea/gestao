@@ -46,11 +46,25 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Apache Commons Lang, a package of Java utility classes for the classes that are in java.lang's hierarchy,
+            or are considered to be so standard as to justify existence in java.lang.-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+
         <!-- Driver do banco de dados -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- Adiciona suporte para retornar requisições XML nos recursos do Spring -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
         </dependency>
 
         <!-- Responsavel por gerar o autocomplete no arquivo de properties das propriedades personalizadas -->

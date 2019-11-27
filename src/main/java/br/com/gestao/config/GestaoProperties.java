@@ -11,4 +11,5 @@ public class GestaoProperties {
 
     private String teste = "VALOR PADRAO";
     private String teste1 = "Valor de teste 1";
+    private String teste2 = "Valor de teste 2";
 }
