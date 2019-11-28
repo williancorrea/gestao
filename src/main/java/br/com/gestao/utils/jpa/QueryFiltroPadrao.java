@@ -1,4 +1,4 @@
-package br.com.gestao.utils;
+package br.com.gestao.utils.jpa;
 
 import lombok.Getter;
 import lombok.Setter;

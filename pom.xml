@@ -61,6 +61,12 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Controla as migracoes do bando de dados-->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
         <!-- Adiciona suporte para retornar requisições XML nos recursos do Spring -->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>

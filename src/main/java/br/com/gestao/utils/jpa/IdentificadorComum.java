@@ -1,4 +1,4 @@
-package br.com.gestao.utils;
+package br.com.gestao.utils.jpa;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -6,7 +6,10 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.UUID;
 
 @ToString
 @EqualsAndHashCode
@@ -22,21 +25,13 @@ public abstract class IdentificadorComum implements Serializable {
     @JsonIgnore
     private Long id;
 
-    @Transient
-    public String getKey() {
-        return this.id.toString();
-    }
+    @NotBlank
+    @Size(min = 36, max = 36)
+    private String chave;
 
-    @Transient
-    public void setKey(String key) {
-        try {
-            if (key == null) {
-                this.id = null;
-            }
-            this.id = Long.parseLong(key);
-        } catch (Exception e) {
-            this.id = null;
-        }
+    @PrePersist
+    private void gerarChave() {
+        setChave(UUID.randomUUID().toString());
     }
 
     @JsonIgnore

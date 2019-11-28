@@ -1,6 +1,9 @@
 package br.com.gestao.modulos.financeiro.banco;
 
+import br.com.gestao.exceptions.EntidadeNaoEncontradaException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -9,39 +12,58 @@ import java.util.Optional;
 public class BancoService {
 
     @Autowired
+    private MessageSource messageSource;
+
+    @Autowired
     private BancoRepository bancoRepository;
 
-    public Banco update(String key, Banco banco) {
-        Long id = 0L;
-//        try {
-//            id = new Criptografia().getKey(key);
-//        } catch (Exception e) {
-//            throw new BancoExceptionNaoEncontrado();
-//        }
-        return update(id, banco);
+    public Banco atualizar(String chave, Banco banco) {
+        Banco objEncontrado = buscarPor(chave);
+        banco.setId(objEncontrado.getId());
+        return atualizar(banco);
     }
 
-    public Banco update(Long id, Banco banco) {
-        Banco updateFound = buscarPorId(id);
-        banco.setId(updateFound.getId());
+    public Banco atualizar(Long id, Banco banco) {
+        Banco objEncontrado = buscarPor(id);
+        banco.setId(objEncontrado.getId());
+        return atualizar(banco);
+    }
+
+    private Banco atualizar(Banco banco) {
         return bancoRepository.save(banco);
     }
 
-    public Banco buscarPorId(Long id) {
-        if (id != null && id > 0) {
+    public void excluir(String chave) {
+        Banco obj = buscarPor(chave);
+        excluir(obj);
+    }
+
+    public void excluir(Long id) {
+        Banco obj = buscarPor(id);
+        excluir(obj);
+    }
+
+    private void excluir(Banco obj) {
+        bancoRepository.deleteById(obj.getId());
+    }
+
+    public Banco buscarPor(Long id) {
+        if (id != null) {
             Optional<Banco> obj = bancoRepository.findById(id);
             if (obj.isPresent()) {
                 return obj.get();
             }
         }
-        throw new BancoExceptionNaoEncontrado();
+        throw new EntidadeNaoEncontradaException(messageSource.getMessage("recurso.banco-nao-encontrado", null, LocaleContextHolder.getLocale()));
     }
 
-//    public Banco buscarPorKey(String key) {
-//        try {
-//            return buscarPorId(new Criptografia().getKey(key));
-//        } catch (Exception e) {
-//            throw new BancoExceptionNaoEncontrado();
-//        }
-//    }
+    public Banco buscarPor(String chave) {
+        if (!chave.isEmpty()) {
+            Optional<Banco> obj = bancoRepository.findByChave(chave);
+            if (obj.isPresent()) {
+                return obj.get();
+            }
+        }
+        throw new EntidadeNaoEncontradaException(messageSource.getMessage("recurso.banco-nao-encontrado", null, LocaleContextHolder.getLocale()));
+    }
 }

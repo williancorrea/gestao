@@ -25,37 +25,29 @@ public class BancoResource {
     private BancoService bancoService;
 
     @GetMapping
-//    @PreAuthorize("hasAuthority('ROLE_LISTAR_BANCO') and #oauth2.hasScope('read')")
-    public Page<Banco> findAll(BancoRepositoryFiltro bancoRepositoryFiltro, Pageable pageable) {
+    public Page<Banco> todos(BancoRepositoryFiltro bancoRepositoryFiltro, Pageable pageable) {
         return bancoRepository.findAll(bancoRepositoryFiltro, pageable);
     }
 
-    @GetMapping("/{key}")
-//    @PreAuthorize("hasAuthority('ROLE_LISTAR_BANCO') and #oauth2.hasScope('read')")
-    public ResponseEntity<Banco> findOne(@Valid @PathVariable String key) {
-//        Banco bancoEncontrado = bancoService.buscarPorKey(key);
-//        return bancoEncontrado != null ? ResponseEntity.ok(bancoEncontrado) : ResponseEntity.notFound().build();
-        return null;
+    @GetMapping("/{chave}")
+    public ResponseEntity<Banco> porCodigo(@Valid @PathVariable String chave) {
+        return ResponseEntity.ok(bancoService.buscarPor(chave));
     }
 
     @PostMapping
-//    @PreAuthorize("hasAuthority('ROLE_SALVAR_BANCO') and #oauth2.hasScope('write')")
-    public ResponseEntity<Banco> save(@Valid @RequestBody Banco banco, HttpServletResponse response) throws Exception {
+    public ResponseEntity<Banco> salvar(@Valid @RequestBody Banco banco, HttpServletResponse response) throws Exception {
         banco = bancoRepository.saveAndFlush(banco);
-//        publisher.publishEvent(new EventResourceCreated(this, response, banco.getKey()));
         return ResponseEntity.status(HttpStatus.CREATED).body(banco);
     }
 
-    @PutMapping("/{key}")
-//    @PreAuthorize("hasAuthority('ROLE_ATUALIZAR_BANCO') and #oauth2.hasScope('write')")
-    public ResponseEntity<Banco> update(@Valid @PathVariable String key, @Valid @RequestBody Banco banco) {
-        return ResponseEntity.status(HttpStatus.OK).body(bancoService.update(key, banco));
+    @PutMapping("/{chave}")
+    public ResponseEntity<Banco> atualizar(@Valid @PathVariable String chave, @Valid @RequestBody Banco banco) {
+        return ResponseEntity.status(HttpStatus.OK).body(bancoService.atualizar(chave, banco));
     }
 
-    @DeleteMapping("/{key}")
+    @DeleteMapping("/{chave}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @PreAuthorize("hasAuthority('ROLE_DELETAR_BANCO') and #oauth2.hasScope('write')")
-    public void delete(@PathVariable String key) {
-//        bancoRepository.deleteById(bancoService.buscarPorKey(key).getId());
+    public void excluir(@PathVariable String chave) {
+        bancoService.excluir(chave);
     }
 }

@@ -1,6 +1,6 @@
 package br.com.gestao.modulos.financeiro.banco;
 
-import br.com.gestao.utils.QueryFiltroPadrao;
+import br.com.gestao.utils.jpa.QueryFiltroPadrao;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
