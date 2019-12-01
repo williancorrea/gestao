@@ -1,6 +1,7 @@
-package br.com.gestao.exceptions.manipulador;
+package br.com.gestao.gerenciadorErros.manipulador;
 
-import br.com.gestao.exceptions.EntidadeNaoEncontradaException;
+import br.com.gestao.gerenciadorErros.exceptions.EntidadeNaoEncontradaException;
+import br.com.gestao.gerenciadorErros.exceptions.RegraDeNegocioException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -62,6 +63,23 @@ public class ManipuladrExceptions extends ResponseEntityExceptionHandler {
         List<ApiError> errors = Arrays.asList(new ApiError(userMessage, developerMessage, HttpStatus.NOT_FOUND));
         return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
+
+    /**
+     * Regra de negocio da aplicacao
+     *
+     * @param ex
+     * @param request
+     * @return
+     */
+    @ExceptionHandler({RegraDeNegocioException.class})
+    public ResponseEntity<Object> handlerRegraDeNegocioException(RegraDeNegocioException ex, WebRequest request) {
+        String userMessage = ex.getMessage();
+        String developerMessage = ex.toString();
+        List<ApiError> errors = Arrays.asList(new ApiError(userMessage, developerMessage, HttpStatus.BAD_REQUEST));
+        return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+
 
     /**
      * Violação de integridade do banco de dados - relacionamento entre tabelas

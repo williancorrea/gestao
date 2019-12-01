@@ -1,4 +1,4 @@
-package br.com.gestao.exceptions.manipulador;
+package br.com.gestao.gerenciadorErros.manipulador;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

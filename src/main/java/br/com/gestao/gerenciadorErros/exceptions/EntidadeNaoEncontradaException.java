@@ -1,4 +1,4 @@
-package br.com.gestao.exceptions;
+package br.com.gestao.gerenciadorErros.exceptions;
 
 public class EntidadeNaoEncontradaException extends RuntimeException {
     private static final long serialVersionUID = 1L;
