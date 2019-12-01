@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface BancoRepository extends JpaRepository<Banco, Long>, BancoRepositoryQuery {
 
-    Optional<Banco> findByChave(String chave);
+    Optional<Banco> findByUuid(String key);
 }

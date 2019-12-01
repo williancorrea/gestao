@@ -7,9 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties("gestao")
 @Data
-public class GestaoProperties {
+public class GestaoApiProperties {
 
-    private String teste = "VALOR PADRAO";
-    private String teste1 = "Valor de teste 1";
-    private String teste2 = "Valor de teste 2";
+    private boolean identificadorPadraoId  = false;
 }

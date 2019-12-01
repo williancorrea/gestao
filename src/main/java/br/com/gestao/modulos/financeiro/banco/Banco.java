@@ -4,6 +4,7 @@ import br.com.gestao.utils.jpa.IdentificadorComum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
@@ -21,13 +22,14 @@ public class Banco extends IdentificadorComum implements Serializable {
 
     @NotBlank
     @Size(min = 5, max = 150)
+    @Column(nullable = false)
     private String nome;
 
     @Size(max = 250)
     private String url;
 
     @Lob
-    private String logo;
+    private String imagem;
 
     private boolean inativo;
 

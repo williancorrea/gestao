@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 
 public class QueryFiltroPadrao {
 
-    @Getter
     @Setter
     private String filtroGlobal;
 

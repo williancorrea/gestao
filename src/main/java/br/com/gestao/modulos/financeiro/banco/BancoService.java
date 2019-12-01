@@ -1,6 +1,7 @@
 package br.com.gestao.modulos.financeiro.banco;
 
 import br.com.gestao.exceptions.EntidadeNaoEncontradaException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -17,29 +18,18 @@ public class BancoService {
     @Autowired
     private BancoRepository bancoRepository;
 
-    public Banco atualizar(String chave, Banco banco) {
-        Banco objEncontrado = buscarPor(chave);
-        banco.setId(objEncontrado.getId());
-        return atualizar(banco);
-    }
-
-    public Banco atualizar(Long id, Banco banco) {
-        Banco objEncontrado = buscarPor(id);
-        banco.setId(objEncontrado.getId());
-        return atualizar(banco);
+    public Banco atualizar(String uuid, Banco objNovo) {
+        Banco objEncontradoBD = buscarPor(uuid);
+        BeanUtils.copyProperties(objNovo, objEncontradoBD, "id", "uuid");
+        return atualizar(objNovo);
     }
 
     private Banco atualizar(Banco banco) {
         return bancoRepository.save(banco);
     }
 
-    public void excluir(String chave) {
-        Banco obj = buscarPor(chave);
-        excluir(obj);
-    }
-
-    public void excluir(Long id) {
-        Banco obj = buscarPor(id);
+    public void excluir(String uuid) {
+        Banco obj = buscarPor(uuid);
         excluir(obj);
     }
 
@@ -47,23 +37,13 @@ public class BancoService {
         bancoRepository.deleteById(obj.getId());
     }
 
-    public Banco buscarPor(Long id) {
-        if (id != null) {
-            Optional<Banco> obj = bancoRepository.findById(id);
+    public Banco buscarPor(String uuid) {
+        if (!uuid.isEmpty()) {
+            Optional<Banco> obj = bancoRepository.findByUuid(uuid);
             if (obj.isPresent()) {
                 return obj.get();
             }
         }
-        throw new EntidadeNaoEncontradaException(messageSource.getMessage("recurso.banco-nao-encontrado", null, LocaleContextHolder.getLocale()));
-    }
-
-    public Banco buscarPor(String chave) {
-        if (!chave.isEmpty()) {
-            Optional<Banco> obj = bancoRepository.findByChave(chave);
-            if (obj.isPresent()) {
-                return obj.get();
-            }
-        }
-        throw new EntidadeNaoEncontradaException(messageSource.getMessage("recurso.banco-nao-encontrado", null, LocaleContextHolder.getLocale()));
+        throw new EntidadeNaoEncontradaException(messageSource.getMessage("recurso.banco-nao-encontrado", new Object[]{uuid}, LocaleContextHolder.getLocale()));
     }
 }

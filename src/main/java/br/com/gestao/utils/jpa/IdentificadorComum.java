@@ -1,9 +1,11 @@
 package br.com.gestao.utils.jpa;
 
+import br.com.gestao.config.GestaoApiProperties;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,6 +20,11 @@ import java.util.UUID;
 public abstract class IdentificadorComum implements Serializable {
     private static final long serialVersionUID = 3361676533116988939L;
 
+    @Autowired
+    @Transient
+    @JsonIgnore
+    private GestaoApiProperties apiProperty;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -27,16 +34,11 @@ public abstract class IdentificadorComum implements Serializable {
 
     @NotBlank
     @Size(min = 36, max = 36)
-    private String chave;
+    @Column(name = "UUID", nullable = false)
+    private String uuid;
 
     @PrePersist
-    private void gerarChave() {
-        setChave(UUID.randomUUID().toString());
-    }
-
-    @JsonIgnore
-    @Transient
-    public boolean isEditando() {
-        return id != null;
+    private void gerarUuid() {
+        setUuid(UUID.randomUUID().toString());
     }
 }

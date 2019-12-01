@@ -16,13 +16,6 @@ public class BancoRepositoryImpl implements BancoRepositoryQuery {
     @PersistenceContext
     private EntityManager manager;
 
-    /**
-     * Busca todos os bancos - paginacao de dados
-     *
-     * @param filtro
-     * @param pageable
-     * @return
-     */
     @Override
     public Page<Banco> findAll(BancoRepositoryFiltro filtro, Pageable pageable) {
 
@@ -65,6 +58,10 @@ public class BancoRepositoryImpl implements BancoRepositoryQuery {
      * @return
      */
     private Criteria criarCriteriaParaFiltro(BancoRepositoryFiltro filtro) {
+
+        //TODO: ALTERAR A CONSULTA PARA UTILIZAR O CRITERIA BUILDER - UTILIZAR O EXEMPLO DE RESTAURANTE
+        //https://github.com/algaworks/curso-especialista-spring-rest/blob/master/05.20-estendendo-o-jpa-repository-para-customizar-o-repositorio-base/algafood-api/src/main/java/com/algaworks/algafood/infrastructure/repository/RestauranteRepositoryImpl.java
+
         Session session = manager.unwrap(Session.class);
         Criteria criteria = session.createCriteria(Banco.class);
 

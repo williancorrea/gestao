@@ -9,5 +9,4 @@ public class GestaoBackApplication {
     public static void main(String[] args) {
         SpringApplication.run(GestaoBackApplication.class, args);
     }
-
 }
