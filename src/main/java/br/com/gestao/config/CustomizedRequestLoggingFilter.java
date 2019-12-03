@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.filter.AbstractRequestLoggingFilter;
 
 public class CustomizedRequestLoggingFilter extends AbstractRequestLoggingFilter {
-	
+
 	public CustomizedRequestLoggingFilter() {
 		this.setIncludePayload(true);
 		this.setIncludeQueryString(true);

@@ -1,6 +1,7 @@
 package br.com.gestao.modulos.financeiro.banco;
 
 import br.com.gestao.utils.jpa.IdentificadorComum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
