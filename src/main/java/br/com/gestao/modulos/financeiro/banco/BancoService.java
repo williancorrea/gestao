@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ public class BancoService {
     @Autowired
     private BancoRepository bancoRepository;
 
+    @Transactional
     public Banco atualizar(String uuid, Banco objNovo) {
         Banco objEncontradoBD = buscarPor(uuid);
         BeanUtils.copyProperties(objNovo, objEncontradoBD, "id", "uuid");
@@ -28,6 +30,7 @@ public class BancoService {
         return bancoRepository.save(banco);
     }
 
+    @Transactional
     public void excluir(String uuid) {
         Banco obj = buscarPor(uuid);
         excluir(obj);
