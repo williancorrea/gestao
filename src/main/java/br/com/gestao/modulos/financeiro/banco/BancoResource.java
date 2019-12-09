@@ -36,8 +36,7 @@ public class BancoResource {
 
     @PostMapping
     public ResponseEntity<Banco> salvar(@Valid @RequestBody Banco banco, HttpServletResponse response) throws Exception {
-        banco = bancoRepository.saveAndFlush(banco);
-        return ResponseEntity.status(HttpStatus.CREATED).body(banco);
+        return ResponseEntity.status(HttpStatus.CREATED).body(bancoService.novo(banco));
     }
 
     @PutMapping("/{uuid}")

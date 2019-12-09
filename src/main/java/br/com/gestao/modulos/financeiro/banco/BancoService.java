@@ -19,15 +19,19 @@ public class BancoService {
     @Autowired
     private BancoRepository bancoRepository;
 
+    public Banco novo(Banco obj) {
+        return criarOuAtualizar(obj);
+    }
+
     @Transactional
     public Banco atualizar(String uuid, Banco objNovo) {
         Banco objEncontradoBD = buscarPor(uuid);
         BeanUtils.copyProperties(objNovo, objEncontradoBD, "id", "uuid");
-        return atualizar(objNovo);
+        return criarOuAtualizar(objNovo);
     }
 
-    private Banco atualizar(Banco banco) {
-        return bancoRepository.save(banco);
+    private Banco criarOuAtualizar(Banco banco) {
+        return bancoRepository.saveAndFlush(banco);
     }
 
     @Transactional
@@ -38,6 +42,7 @@ public class BancoService {
 
     private void excluir(Banco obj) {
         bancoRepository.deleteById(obj.getId());
+        bancoRepository.flush();
     }
 
     public Banco buscarPor(String uuid) {
