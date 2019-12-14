@@ -1,15 +1,20 @@
 package br.com.gestao.modulos.financeiro.banco;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BancoRepositoryImpl implements BancoRepositoryQuery {
 
@@ -17,74 +22,71 @@ public class BancoRepositoryImpl implements BancoRepositoryQuery {
     private EntityManager manager;
 
     @Override
-    public Page<Banco> findAll(BancoRepositoryFiltro filtro, Pageable pageable) {
+    public Page<Banco> findAll(@PageableDefault(size = 5) Pageable pageable, BancoRepositoryFiltro filtro) {
+
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+        CriteriaQuery<Banco> criteria = criteriaBuilder.createQuery(Banco.class);
+        Root<Banco> root = criteria.from(Banco.class);
+
+//        utilizar fech para resolver o problema do N+1 se for necessario ex:
+//        root.fetch("restaurante").root.fetch("cozinha ");
+//        root.fetch("cliente");
 
         //Criterios da pesquisa
-        Criteria criteria = criarCriteriaParaFiltro(filtro);
+        Predicate[] predicates = criarRestricoes(filtro, criteriaBuilder, root);
+        criteria.where(predicates);
 
         //Paginacao
-        criteria.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
-        criteria.setMaxResults(pageable.getPageSize());
-
-        //Ordenacao
-        if (filtro.getCampoOrdenacao() != null && filtro.getOrdemClassificacao() != null) {
-            if (filtro.getOrdemClassificacao().equalsIgnoreCase("ASC")) {
-                criteria.addOrder(Order.asc(filtro.getCampoOrdenacao()));
-            } else {
-                criteria.addOrder(Order.desc(filtro.getCampoOrdenacao()));
-            }
-        }
+        Query consultaRegistro = manager.createQuery(criteria);
+        consultaRegistro.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
+        consultaRegistro.setMaxResults(pageable.getPageSize());
 
         //Consulta paginada
-        return new PageImpl<>(criteria.list(), pageable, quantidadeRegistrosFiltrados(filtro));
-    }
-
-    /**
-     * RECUPERA A QUANTIDADE DE REGISTRO
-     *
-     * @param filtro
-     * @return
-     */
-    public int quantidadeRegistrosFiltrados(BancoRepositoryFiltro filtro) {
-        Criteria criteria = criarCriteriaParaFiltro(filtro);
-        criteria.setProjection(Projections.rowCount());
-        return ((Number) criteria.uniqueResult()).intValue();
+        return new PageImpl<>(consultaRegistro.getResultList(), pageable, total(filtro));
     }
 
     /**
      * MONTA OS CRITERIOS PARA A PESQUISA
-     *
-     * @param filtro
-     * @return
      */
-    private Criteria criarCriteriaParaFiltro(BancoRepositoryFiltro filtro) {
-
-        //TODO: ALTERAR A CONSULTA PARA UTILIZAR O CRITERIA BUILDER - UTILIZAR O EXEMPLO DE RESTAURANTE
-        //https://github.com/algaworks/curso-especialista-spring-rest/blob/master/05.20-estendendo-o-jpa-repository-para-customizar-o-repositorio-base/algafood-api/src/main/java/com/algaworks/algafood/infrastructure/repository/RestauranteRepositoryImpl.java
-
-        Session session = manager.unwrap(Session.class);
-        Criteria criteria = session.createCriteria(Banco.class);
+    private Predicate[] criarRestricoes(BancoRepositoryFiltro filtro, CriteriaBuilder criteriaBuilder, Root root) {
+        List<Predicate> predicates = new ArrayList<>();
 
         if (StringUtils.isNotBlank(filtro.getFiltroGlobal())) {
-            Disjunction disjunction = Restrictions.disjunction(); // Restricao com OR
-            disjunction.add(Restrictions.ilike("codigo", filtro.getFiltroGlobal(), MatchMode.ANYWHERE));
-            disjunction.add(Restrictions.ilike("nome", filtro.getFiltroGlobal(), MatchMode.ANYWHERE));
-            disjunction.add(Restrictions.ilike("url", filtro.getFiltroGlobal(), MatchMode.ANYWHERE));
-            criteria.add(disjunction);
+            predicates.add(criteriaBuilder.like(root.get("codigo"), "%" + filtro.getFiltroGlobal() + "%"));
+            predicates.add(criteriaBuilder.like(root.get("nome"), "%" + filtro.getFiltroGlobal() + "%"));
+            predicates.add(criteriaBuilder.like(root.get("url"), "%" + filtro.getFiltroGlobal() + "%"));
 
-            return criteria;
+            List<Predicate> predicatesOR = new ArrayList<Predicate>();
+            predicatesOR.add(criteriaBuilder.or(predicates.toArray(new Predicate[predicates.size()])));
+
+            return predicatesOR.toArray(new Predicate[predicatesOR.size()]);
         }
 
         if (StringUtils.isNotBlank(filtro.getCodigo())) {
-            criteria.add(Restrictions.ilike("codigo", filtro.getCodigo(), MatchMode.ANYWHERE));
+            predicates.add(criteriaBuilder.like(root.get("codigo"), "%" + filtro.getCodigo() + "%"));
         }
         if (StringUtils.isNotBlank(filtro.getNome())) {
-            criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
+            predicates.add(criteriaBuilder.like(root.get("nome"), "%" + filtro.getNome() + "%"));
         }
         if (StringUtils.isNotBlank(filtro.getUrl())) {
-            criteria.add(Restrictions.ilike("url", filtro.getUrl(), MatchMode.ANYWHERE));
+            predicates.add(criteriaBuilder.like(root.get("url"), "%" + filtro.getUrl() + "%"));
         }
 
-        return criteria;
+        return predicates.toArray(new Predicate[predicates.size()]);
+    }
+
+    /**
+     * TOTAL DE REGISTROS - SEM PAGINACAO
+     */
+    private Long total(BancoRepositoryFiltro filtro) {
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+        Root<Banco> root = criteria.from(Banco.class);
+
+        Predicate[] predicates = criarRestricoes(filtro, builder, root);
+        criteria.where(predicates);
+
+        criteria.select(builder.count(root));
+        return manager.createQuery(criteria).getSingleResult();
     }
 }

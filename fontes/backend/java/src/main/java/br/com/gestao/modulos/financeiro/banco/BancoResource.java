@@ -25,8 +25,8 @@ public class BancoResource {
     private BancoService bancoService;
 
     @GetMapping
-    public Page<Banco> todos(BancoRepositoryFiltro bancoRepositoryFiltro, Pageable pageable) {
-        return bancoRepository.findAll(bancoRepositoryFiltro, pageable);
+    public Page<Banco> todos(Pageable pageable, BancoRepositoryFiltro bancoRepositoryFiltro) {
+        return bancoRepository.findAll(pageable, bancoRepositoryFiltro);
     }
 
     @GetMapping("/{uuid}")

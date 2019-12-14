@@ -20,6 +20,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -213,6 +214,21 @@ public class ManipuladorExceptions extends ResponseEntityExceptionHandler {
     }
 
     /**
+     * Faz o tratamento de paramentos informados incorretamente
+     */
+//    @Override
+//    protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//
+//
+//        String mensagem = messageSource.getMessage("recurso.metodo-nao-suportado", null, LocaleContextHolder.getLocale());
+//        String detalhes = ex.toString();
+//        String uri = ((ServletWebRequest) request).getRequest().getRequestURI();
+//        String metodo = ((ServletWebRequest) request).getRequest().getMethod();
+//        List<ApiErro> errors = Arrays.asList(new ApiErro(mensagem, detalhes, HttpStatus.METHOD_NOT_ALLOWED, uri, metodo));
+//        return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.METHOD_NOT_ALLOWED, request);
+//    }
+
+    /**
      * Recurso nao encontrado
      */
     @Override
@@ -224,5 +240,4 @@ public class ManipuladorExceptions extends ResponseEntityExceptionHandler {
         List<ApiErro> errors = Arrays.asList(new ApiErro(mensagem, detalhes, HttpStatus.BAD_REQUEST, uri, metodo));
         return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
-
 }

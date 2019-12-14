@@ -5,5 +5,5 @@ import org.springframework.data.domain.Pageable;
 
 
 public interface BancoRepositoryQuery {
-    Page<Banco> findAll(BancoRepositoryFiltro bancoRepositoryFiltro, Pageable pageable);
+    Page<Banco> findAll(Pageable pageable, BancoRepositoryFiltro bancoRepositoryFiltro);
 }
