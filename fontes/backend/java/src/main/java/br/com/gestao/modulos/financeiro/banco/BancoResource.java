@@ -29,9 +29,9 @@ public class BancoResource {
         return bancoRepository.findAll(pageable, bancoRepositoryFiltro);
     }
 
-    @GetMapping("/{uuid}")
-    public ResponseEntity<Banco> porCodigo(@Valid @PathVariable String uuid) {
-        return ResponseEntity.ok(bancoService.buscarPor(uuid));
+    @GetMapping("/{key}")
+    public ResponseEntity<Banco> porCodigo(@Valid @PathVariable String key) {
+        return ResponseEntity.ok(bancoService.buscarPor(key));
     }
 
     @PostMapping
@@ -39,14 +39,14 @@ public class BancoResource {
         return ResponseEntity.status(HttpStatus.CREATED).body(bancoService.novo(banco));
     }
 
-    @PutMapping("/{uuid}")
-    public ResponseEntity<Banco> atualizar(@Valid @PathVariable String uuid, @Valid @RequestBody Banco banco) {
-        return ResponseEntity.status(HttpStatus.OK).body(bancoService.atualizar(uuid, banco));
+    @PutMapping("/{key}")
+    public ResponseEntity<Banco> atualizar(@Valid @PathVariable String key, @Valid @RequestBody Banco banco) {
+        return ResponseEntity.status(HttpStatus.OK).body(bancoService.atualizar(key, banco));
     }
 
-    @DeleteMapping("/{uuid}")
+    @DeleteMapping("/{key}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluir(@PathVariable String uuid) {
-        bancoService.excluir(uuid);
+    public void excluir(@PathVariable String key) {
+        bancoService.excluir(key);
     }
 }
