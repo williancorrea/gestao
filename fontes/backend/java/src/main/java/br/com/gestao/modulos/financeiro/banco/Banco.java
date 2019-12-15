@@ -28,10 +28,10 @@ public class Banco extends IdentificadorComum implements Serializable {
     @Size(max = 250)
     private String url;
 
+    private boolean inativo;
+
     @Lob
     private String imagem;
-
-    private boolean inativo;
 
     public Banco() {
     }

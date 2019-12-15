@@ -1,5 +1,6 @@
 package br.com.gestao.modulos.financeiro.bancoAgencia;
 
+import br.com.gestao.modulos.compartilhado.cidadeEstado.Cidade;
 import br.com.gestao.modulos.financeiro.banco.Banco;
 import br.com.gestao.utils.jpa.IdentificadorComum;
 import lombok.Data;
@@ -15,8 +16,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
-@Entity(name = "FIN_BANCO_AGENCIA")
 @Data
+@Entity(name = "FIN_BANCO_AGENCIA")
 public class BancoAgencia extends IdentificadorComum implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -25,11 +26,10 @@ public class BancoAgencia extends IdentificadorComum implements Serializable {
     @JoinColumn(name = "ID_FIN_BANCO", referencedColumnName = "id", nullable = false)
     private Banco banco;
 
-    //TODO: criar a classe cidade
-//    @JoinColumn(name = "ID_CIDADE", referencedColumnName = "id")
-//    @ManyToOne
-//    @NotNull
-//    private Cidade cidade;
+    @JoinColumn(name = "ID_CIDADE", referencedColumnName = "id")
+    @ManyToOne
+    @NotNull
+    private Cidade cidade;
 
     @Size(max = 50)
     @NotBlank
@@ -66,3 +66,4 @@ public class BancoAgencia extends IdentificadorComum implements Serializable {
     public BancoAgencia() {
     }
 }
+
