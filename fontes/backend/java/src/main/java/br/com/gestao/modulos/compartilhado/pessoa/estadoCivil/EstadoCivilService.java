@@ -1,4 +1,4 @@
-package br.com.gestao.modulos.financeiro.banco;
+package br.com.gestao.modulos.compartilhado.pessoa.estadoCivil;
 
 import br.com.gestao.config.propriedades.GestaoApiProperties;
 import br.com.gestao.gerenciadorErros.exceptions.EntidadeNaoEncontradaException;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class BancoService {
+public class EstadoCivilService {
 
     @Autowired
     private GestaoApiProperties gestaoApiProperties;
@@ -21,42 +21,42 @@ public class BancoService {
     private MessageSource messageSource;
 
     @Autowired
-    private BancoRepository bancoRepository;
+    private EstadoCivilRepository estadoCivilRepository;
 
-    public Banco novo(Banco obj) {
+    public EstadoCivil novo(EstadoCivil obj) {
         return criarOuAtualizar(obj);
     }
 
     @Transactional
-    public Banco atualizar(String key, Banco objNovo) {
-        Banco objEncontrado = buscarPor(key);
+    public EstadoCivil atualizar(String key, EstadoCivil objNovo) {
+        EstadoCivil objEncontrado = buscarPor(key);
         BeanUtils.copyProperties(objNovo, objEncontrado, "id", "uuid");
         return criarOuAtualizar(objNovo);
     }
 
-    private Banco criarOuAtualizar(Banco obj) {
-        return bancoRepository.saveAndFlush(obj);
+    private EstadoCivil criarOuAtualizar(EstadoCivil obj) {
+        return estadoCivilRepository.saveAndFlush(obj);
     }
 
     @Transactional
     public void excluir(String key) {
-        Banco obj = buscarPor(key);
+        EstadoCivil obj = buscarPor(key);
         excluir(obj);
     }
 
-    private void excluir(Banco obj) {
-        bancoRepository.deleteById(obj.getId());
-        bancoRepository.flush();
+    private void excluir(EstadoCivil obj) {
+        estadoCivilRepository.deleteById(obj.getId());
+        estadoCivilRepository.flush();
     }
 
-    public Banco buscarPor(String key) {
+    public EstadoCivil buscarPor(String key) {
         if (!key.isEmpty()) {
             try {
-                Optional<Banco> obj = Optional.empty();
+                Optional<EstadoCivil> obj = Optional.empty();
                 if (gestaoApiProperties.isIdentificadorPadraoId()) {
-                    obj = bancoRepository.findById(Long.parseLong(key));
+                    obj = estadoCivilRepository.findById(Long.parseLong(key));
                 } else {
-                    obj = bancoRepository.findByUuid(key);
+                    obj = estadoCivilRepository.findByUuid(key);
                 }
                 if (obj.isPresent()) {
                     return obj.get();
@@ -65,6 +65,6 @@ public class BancoService {
                 //  Vai para o limbo
             }
         }
-        throw new EntidadeNaoEncontradaException(messageSource.getMessage("recurso.banco-nao-encontrado", new Object[]{key}, LocaleContextHolder.getLocale()));
+        throw new EntidadeNaoEncontradaException(messageSource.getMessage("recurso.estado-civil-nao-encontrado", new Object[]{key}, LocaleContextHolder.getLocale()));
     }
 }
