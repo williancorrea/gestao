@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade</OriginalElement>
+  <nodes>
+    <node x="265.0" y="211.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco</node>
+    <node x="0.0" y="0.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.estado</node>
+    <node x="257.5" y="565.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_extrato_abreviacao</node>
+    <node x="0.0" y="233.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade</node>
+    <node x="530.5" y="0.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.estado_civil</node>
+    <node x="31.5" y="466.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_agencia</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_agencia" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade">
+      <point x="-51.5" y="-179.5" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_agencia" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco">
+      <point x="51.5" y="-179.5" />
+      <point x="186.0" y="441.0" />
+      <point x="300.5" y="441.0" />
+      <point x="-35.5" y="102.5" />
+    </edge>
+    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.estado">
+      <point x="0.0" y="-80.5" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_extrato_abreviacao" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco">
+      <point x="0.0" y="-80.5" />
+      <point x="35.5" y="102.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7739644970414201" x="333.5" y="412.5" />
+  <SelectedNodes>
+    <node>cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+
