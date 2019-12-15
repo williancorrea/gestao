@@ -1,4 +1,4 @@
-package br.com.gestao.modulos.financeiro.bancoAgencia;
+package br.com.gestao.modulos.financeiro.bancoExtratoAbreviacao;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -16,17 +16,17 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BancoAgenciaRepositoryImpl implements BancoAgenciaRepositoryQuery {
+public class BancoExtratoAbreviacaoRepositoryImpl implements BancoExtratoAbreviacaoRepositoryQuery {
 
     @PersistenceContext
     private EntityManager manager;
 
     @Override
-    public Page<BancoAgencia> findAll(@PageableDefault(size = 5) Pageable pageable, BancoAgenciaRepositoryFiltro filtro) {
+    public Page<BancoExtratoAbreviacao> findAll(@PageableDefault(size = 5) Pageable pageable, BancoExtratoAbreviacaoRepositoryFiltro filtro) {
 
         CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
-        CriteriaQuery<BancoAgencia> criteria = criteriaBuilder.createQuery(BancoAgencia.class);
-        Root<BancoAgencia> root = criteria.from(BancoAgencia.class);
+        CriteriaQuery<BancoExtratoAbreviacao> criteria = criteriaBuilder.createQuery(BancoExtratoAbreviacao.class);
+        Root<BancoExtratoAbreviacao> root = criteria.from(BancoExtratoAbreviacao.class);
         root.fetch("banco");
 
         //Criterios da pesquisa
@@ -45,7 +45,7 @@ public class BancoAgenciaRepositoryImpl implements BancoAgenciaRepositoryQuery {
     /**
      * MONTA OS CRITERIOS PARA A PESQUISA
      */
-    private Predicate[] criarRestricoes(BancoAgenciaRepositoryFiltro filtro, CriteriaBuilder criteriaBuilder, Root root) {
+    private Predicate[] criarRestricoes(BancoExtratoAbreviacaoRepositoryFiltro filtro, CriteriaBuilder criteriaBuilder, Root root) {
         List<Predicate> predicates = new ArrayList<>();
 
         if (StringUtils.isNotBlank(filtro.getFiltroGlobal())) {
@@ -63,10 +63,10 @@ public class BancoAgenciaRepositoryImpl implements BancoAgenciaRepositoryQuery {
     /**
      * TOTAL DE REGISTROS - SEM PAGINACAO
      */
-    private Long total(BancoAgenciaRepositoryFiltro filtro) {
+    private Long total(BancoExtratoAbreviacaoRepositoryFiltro filtro) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
-        Root<BancoAgencia> root = criteria.from(BancoAgencia.class);
+        Root<BancoExtratoAbreviacao> root = criteria.from(BancoExtratoAbreviacao.class);
 
         Predicate[] predicates = criarRestricoes(filtro, builder, root);
         criteria.where(predicates);
