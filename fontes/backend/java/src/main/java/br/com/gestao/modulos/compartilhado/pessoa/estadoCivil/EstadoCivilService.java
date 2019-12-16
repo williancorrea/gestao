@@ -23,6 +23,7 @@ public class EstadoCivilService {
     @Autowired
     private EstadoCivilRepository estadoCivilRepository;
 
+    @Transactional
     public EstadoCivil novo(EstadoCivil obj) {
         return criarOuAtualizar(obj);
     }

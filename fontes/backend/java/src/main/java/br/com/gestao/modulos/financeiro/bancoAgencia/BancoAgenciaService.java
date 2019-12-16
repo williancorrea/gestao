@@ -34,6 +34,7 @@ public class BancoAgenciaService {
     @Autowired
     private BancoService bancoService;
 
+    @Transactional
     public BancoAgencia novo(BancoAgencia obj) {
         return criarOuAtualizar(obj);
     }

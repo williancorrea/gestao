@@ -26,6 +26,7 @@ public class CidadeService {
     @Autowired
     private EstadoRepository estadoRepository;
 
+    @Transactional
     public Cidade novo(Cidade obj) {
         return criarOuAtualizar(obj);
     }

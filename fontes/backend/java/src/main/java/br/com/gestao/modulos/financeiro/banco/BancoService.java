@@ -23,6 +23,7 @@ public class BancoService {
     @Autowired
     private BancoRepository bancoRepository;
 
+    @Transactional
     public Banco novo(Banco obj) {
         return criarOuAtualizar(obj);
     }

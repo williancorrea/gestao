@@ -27,6 +27,7 @@ public class BancoExtratoAbreviacaoService {
     @Autowired
     private BancoService bancoService;
 
+    @Transactional
     public BancoExtratoAbreviacao novo(BancoExtratoAbreviacao obj) {
         return criarOuAtualizar(obj);
     }
