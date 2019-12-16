@@ -74,4 +74,6 @@ public class BancoExtratoAbreviacaoRepositoryImpl implements BancoExtratoAbrevia
         criteria.select(builder.count(root));
         return manager.createQuery(criteria).getSingleResult();
     }
+
+
 }

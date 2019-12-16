@@ -111,4 +111,34 @@ public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
         criteria.select(builder.count(root));
         return manager.createQuery(criteria).getSingleResult();
     }
+
+    @Override
+    public Boolean verificarCPFJaCadastrado(String cpf, Long id) {
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+        CriteriaQuery<Pessoa> criteria = criteriaBuilder.createQuery(Pessoa.class);
+        Root<Pessoa> root = criteria.from(Pessoa.class);
+
+        criteria.where(criteriaBuilder.equal(root.get("pessoaFisica").get("cpf"), cpf));
+        Query consulta = manager.createQuery(criteria);
+
+        if (consulta.getResultList().size() == 0 || ((Pessoa) consulta.getSingleResult()).getId() == id) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean verificarCNPJJaCadastrado(String cnpj, Long id) {
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+        CriteriaQuery<Pessoa> criteria = criteriaBuilder.createQuery(Pessoa.class);
+        Root<Pessoa> root = criteria.from(Pessoa.class);
+
+        criteria.where(criteriaBuilder.equal(root.get("pessoaJuridica").get("cnpj"), cnpj));
+        Query consulta = manager.createQuery(criteria);
+
+        if (consulta.getResultList().size() == 0 || ((Pessoa) consulta.getSingleResult()).getId() == id) {
+            return false;
+        }
+        return true;
+    }
 }

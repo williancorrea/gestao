@@ -4,15 +4,15 @@
   <OriginalElement>cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade</OriginalElement>
   <nodes>
     <node x="736.6666666666666" y="631.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_extrato_abreviacao</node>
-    <node x="254.16666666666663" y="233.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade</node>
-    <node x="299.91666666666663" y="1183.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa_juridica</node>
-    <node x="1009.6666666666665" y="0.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.flyway_schema_history</node>
     <node x="682.3083333333334" y="211.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco</node>
-    <node x="183.66666666666663" y="466.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa</node>
-    <node x="510.66666666666663" y="532.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_agencia</node>
-    <node x="20.91666666666663" y="1007.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa_fisica</node>
-    <node x="0.0" y="631.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.estado_civil</node>
     <node x="254.16666666666663" y="0.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.estado</node>
+    <node x="1009.6666666666665" y="0.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.flyway_schema_history</node>
+    <node x="299.91666666666663" y="1183.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa_juridica</node>
+    <node x="183.66666666666663" y="466.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa</node>
+    <node x="20.91666666666663" y="1007.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa_fisica</node>
+    <node x="254.16666666666663" y="233.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade</node>
+    <node x="0.0" y="631.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.estado_civil</node>
+    <node x="510.66666666666663" y="532.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_agencia</node>
   </nodes>
   <notes />
   <edges>
@@ -67,7 +67,7 @@
       <point x="76.75" y="245.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.4739644970414202" x="1080.5010982967606" y="773.4926979689026" />
+  <settings layout="Hierarchic Group" zoom="0.3911483253588517" x="594.5" y="826.0" />
   <SelectedNodes>
     <node>cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade</node>
   </SelectedNodes>
