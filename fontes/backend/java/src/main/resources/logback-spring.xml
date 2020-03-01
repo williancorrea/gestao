@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+<!--    Incluindo as configuracoes padroes dos logs (CONSOLE)-->
+<!--    <include resource="org/springframework/boot/logging/logback/base.xml" />-->
+
+<!--    busca o token no arquivo de propriedades-->
+    <springProperty name="logglyToken" source="logging.loggly.token" />
+
+<!--    Registra os logos no Console da IDE-->
     <appender name="Console"
         class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -9,18 +16,30 @@
             </Pattern>
         </layout>
     </appender>
- 
-    <!-- LOG everything at INFO level -->
+
+    <appender name="loggly" class="ch.qos.logback.ext.loggly.LogglyAppender">
+        <endpointUrl>https://logs-01.loggly.com/inputs/${logglyToken}/tag/logback</endpointUrl>
+        <pattern>%d{"ISO8601", UTC} %p %t %c %M - %m%n</pattern>
+    </appender>
+
+<!--    Registra os logs de forma assincrona-->
+    <appender name="logglyAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="loggly" />
+    </appender>
+
+<!--     loga tudo no nivel INFO -->
     <root level="info">
         <appender-ref ref="Console" />
+        <appender-ref ref="logglyAsync" />
     </root>
- 
+
+
     <logger name="br.com.gestao" level="trace" additivity="false">
         <appender-ref ref="Console" />
     </logger>
     
-    <logger name="br.com.gestao.CustomizedRequestLoggingFilter" additivity="false">
+    <logger name="br.com.gestao.config.CustomizedRequestLoggingFilter" additivity="false">
 	    <level value="DEBUG" />
 	</logger>
- 
+
 </configuration>
