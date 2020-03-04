@@ -4,8 +4,9 @@
 <!--    Incluindo as configuracoes padroes dos logs (CONSOLE)-->
 <!--    <include resource="org/springframework/boot/logging/logback/base.xml" />-->
 
-<!--    busca o token no arquivo de propriedades-->
+    <!-- arquivo de propriedades-->
     <springProperty name="logglyToken" source="logging.loggly.token" />
+    <springProperty name="loggingLevel" source="logging.level" />
 
 <!--    Registra os logos no Console da IDE-->
     <appender name="Console"
@@ -27,8 +28,7 @@
         <appender-ref ref="loggly" />
     </appender>
 
-<!--     loga tudo no nivel INFO -->
-    <root level="info">
+    <root>
         <appender-ref ref="Console" />
         <appender-ref ref="logglyAsync" />
     </root>
@@ -36,6 +36,7 @@
 
     <logger name="br.com.gestao" level="trace" additivity="false">
         <appender-ref ref="Console" />
+        <appender-ref ref="logglyAsync" />
     </logger>
     
     <logger name="br.com.gestao.config.CustomizedRequestLoggingFilter" additivity="false">

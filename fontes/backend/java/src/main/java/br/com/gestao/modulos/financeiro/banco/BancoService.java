@@ -2,6 +2,7 @@ package br.com.gestao.modulos.financeiro.banco;
 
 import br.com.gestao.config.propriedades.GestaoApiProperties;
 import br.com.gestao.gerenciadorErros.exceptions.EntidadeNaoEncontradaException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class BancoService {
 

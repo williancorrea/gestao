@@ -35,10 +35,6 @@ public class BancoResource {
     @GetMapping("/{key}")
     public ResponseEntity<Banco> porCodigo(@Valid @PathVariable String key) {
         log.info("Consultando banco com key: {}", key);
-
-        if(true)
-            throw new RuntimeException("ERRO CONSULTANDO BANCO");
-
         return ResponseEntity.ok(bancoService.buscarPor(key));
     }
 
