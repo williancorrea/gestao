@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.IgnoredPropertyException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class ManipuladorExceptions extends ResponseEntityExceptionHandler {
@@ -65,6 +67,8 @@ public class ManipuladorExceptions extends ResponseEntityExceptionHandler {
         String uri = ((ServletWebRequest) request).getRequest().getRequestURI();
         String metodo = ((ServletWebRequest) request).getRequest().getMethod();
         List<ApiErro> errors = Arrays.asList(new ApiErro(mensagem, detalhes, HttpStatus.INTERNAL_SERVER_ERROR, uri, metodo));
+
+        log.error(ex.getMessage(), ex);
         return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 

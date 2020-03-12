@@ -1,76 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>DATABASE</ID>
-  <OriginalElement>cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade</OriginalElement>
+  <OriginalElement />
   <nodes>
-    <node x="736.6666666666666" y="631.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_extrato_abreviacao</node>
-    <node x="682.3083333333334" y="211.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco</node>
-    <node x="254.16666666666663" y="0.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.estado</node>
-    <node x="1009.6666666666665" y="0.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.flyway_schema_history</node>
-    <node x="299.91666666666663" y="1183.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa_juridica</node>
-    <node x="183.66666666666663" y="466.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa</node>
-    <node x="20.91666666666663" y="1007.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa_fisica</node>
-    <node x="254.16666666666663" y="233.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade</node>
-    <node x="0.0" y="631.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.estado_civil</node>
-    <node x="510.66666666666663" y="532.0">cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_agencia</node>
+    <node x="770.2499999999999" y="1007.0">db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.PESSOA_FISICA</node>
+    <node x="258.9999999999999" y="532.0">db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.FIN_BANCO_AGENCIA</node>
+    <node x="1139.4166666666665" y="0.0">db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.flyway_schema_history</node>
+    <node x="613.4999999999999" y="0.0">db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.ESTADO</node>
+    <node x="613.4999999999999" y="233.0">db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.CIDADE</node>
+    <node x="939.4166666666665" y="631.0">db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.ESTADO_CIVIL</node>
+    <node x="482.2499999999999" y="1183.0">db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.PESSOA_JURIDICA</node>
+    <node x="145.7583333333332" y="211.0">db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.FIN_BANCO</node>
+    <node x="0.0" y="631.0">db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.FIN_BANCO_EXTRATO_ABREVIACAO</node>
+    <node x="524.9999999999999" y="466.0">db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.PESSOA</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa_fisica" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade">
-      <point x="0.0" y="-322.5" />
-      <point x="150.41666666666663" y="982.0" />
-      <point x="146.5" y="982.0" />
-      <point x="146.5" y="441.0" />
-      <point x="281.83333333333326" y="441.0" />
-      <point x="-55.33333333333334" y="80.5" />
+    <edge source="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.PESSOA_JURIDICA" target="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.PESSOA">
+      <point x="0.0" y="-146.5" />
+      <point x="-91.25" y="245.5" />
     </edge>
-    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_agencia" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade">
-      <point x="-51.5" y="-179.5" />
-      <point x="562.1666666666666" y="441.0" />
-      <point x="392.5" y="441.0" />
-      <point x="55.33333333333334" y="80.5" />
+    <edge source="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.PESSOA_FISICA" target="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.ESTADO_CIVIL">
+      <point x="101.33333333333333" y="-322.5" />
+      <point x="1023.5833333333333" y="982.0" />
+      <point x="1016.9166666666665" y="982.0" />
+      <point x="0.0" y="80.5" />
     </edge>
-    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_agencia" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco">
-      <point x="51.5" y="-179.5" />
-      <point x="665.1666666666666" y="441.0" />
-      <point x="717.8083333333334" y="441.0" />
-      <point x="-35.5" y="102.5" />
+    <edge source="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.PESSOA_FISICA" target="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.PESSOA">
+      <point x="-101.33333333333331" y="-322.5" />
+      <point x="820.9166666666665" y="982.0" />
+      <point x="798.7499999999999" y="982.0" />
+      <point x="91.25" y="245.5" />
     </edge>
-    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.estado">
+    <edge source="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.CIDADE" target="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.ESTADO">
       <point x="0.0" y="-80.5" />
       <point x="0.0" y="80.5" />
     </edge>
-    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa_fisica" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.estado_civil">
-      <point x="-86.33333333333331" y="-322.5" />
-      <point x="64.08333333333331" y="982.0" />
-      <point x="68.0" y="982.0" />
-      <point x="0.0" y="80.5" />
+    <edge source="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.PESSOA_FISICA" target="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.CIDADE">
+      <point x="0.0" y="-322.5" />
+      <point x="922.2499999999999" y="982.0" />
+      <point x="928.9166666666665" y="982.0" />
+      <point x="928.9166666666665" y="441.0" />
+      <point x="770.1666666666665" y="441.0" />
+      <point x="62.66666666666666" y="80.5" />
     </edge>
-    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa_fisica" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa">
-      <point x="86.33333333333333" y="-322.5" />
-      <point x="236.74999999999994" y="982.0" />
-      <point x="260.41666666666663" y="982.0" />
-      <point x="-76.75" y="245.5" />
+    <edge source="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.FIN_BANCO_AGENCIA" target="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.FIN_BANCO">
+      <point x="-61.5" y="-179.5" />
+      <point x="320.4999999999999" y="441.0" />
+      <point x="266.5083333333332" y="441.0" />
+      <point x="40.25" y="102.5" />
     </edge>
-    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade">
+    <edge source="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.FIN_BANCO_AGENCIA" target="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.CIDADE">
+      <point x="61.5" y="-179.5" />
+      <point x="443.4999999999999" y="441.0" />
+      <point x="644.8333333333333" y="441.0" />
+      <point x="-62.666666666666664" y="80.5" />
+    </edge>
+    <edge source="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.PESSOA" target="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.CIDADE">
       <point x="0.0" y="-245.5" />
       <point x="0.0" y="80.5" />
     </edge>
-    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco_extrato_abreviacao" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.fin_banco">
+    <edge source="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.FIN_BANCO_EXTRATO_ABREVIACAO" target="db325854-2550-4251-a326-8330a6bd776a.TABLE:gestao_back.FIN_BANCO">
       <point x="0.0" y="-80.5" />
-      <point x="850.6666666666666" y="441.0" />
-      <point x="788.8083333333334" y="441.0" />
-      <point x="35.5" y="102.5" />
-    </edge>
-    <edge source="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa_juridica" target="cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.pessoa">
-      <point x="0.0" y="-146.5" />
-      <point x="76.75" y="245.5" />
+      <point x="119.5" y="441.0" />
+      <point x="186.0083333333332" y="441.0" />
+      <point x="-40.25" y="102.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.3911483253588517" x="594.5" y="826.0" />
-  <SelectedNodes>
-    <node>cd4fc0c5-3059-4eea-a951-de9e07226fe3.TABLE:gestao_back.cidade</node>
-  </SelectedNodes>
+  <settings layout="Hierarchic Group" zoom="0.3911483253588517" x="407.55963302752286" y="400.65749235474004" />
+  <SelectedNodes />
   <Categories>
     <Category>Key columns</Category>
     <Category>Columns</Category>

@@ -109,10 +109,10 @@ public class Utils {
         return dataExtenso.substring(++index, lenght);
     }
 
-    public static String StrZeroEsquerda(String value, int n) {
+    public static String StrZeroEsquerda(String value, int quantidade) {
         String s = value.trim();
         StringBuffer resp = new StringBuffer();
-        int fim = n - s.length();
+        int fim = quantidade - s.length();
         for (int x = 0; x < fim; x++)
             resp.append('0');
         return resp + s;
