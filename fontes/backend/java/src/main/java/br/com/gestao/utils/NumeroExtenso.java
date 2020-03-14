@@ -9,6 +9,11 @@ public class NumeroExtenso {
     private ArrayList nro;
     private BigInteger num;
 
+    /**
+     * O maior número aceito no sistema de potências sucessivas de dez, é o centilhão,
+     * registrado pela primeira vez em 1852. Representa a centésima potência de um milhão,
+     * ou o número 1 seguido de 600 zeros (embora apenas utilizado na Grã-Bretanha e na Alemanha)
+     */
     private String Qualificadores[][] = {
             {"centavo", "centavos"},
             {"", ""},
@@ -19,53 +24,45 @@ public class NumeroExtenso {
             {"quatrilhão", "quatrilhões"},
             {"quintilhão", "quintilhões"},
             {"sextilhão", "sextilhões"},
-            {"septilhão", "septilhões"}
+            {"septilhão", "septilhões"},
+            {"octilhão", "octilhão"},
+            {"nonilhão", "nonilhão"},
+            {"decilhão", "decilhão"},
+            {"undecilhão", "undecilhão"},
+            {"duodecilhão", "duodecilhão"},
+            {"tredecilhão", "tredecilhão"},
+            {"quattuordecilhão", "quattuordecilhão"},
+            {"quindecilhão", "quindecilhão"},
+            {"vigintilião", "vigintilião"},
+            {"centilhão", "centilhão"},
+
+            {"SEM SUPORTE", "SEM SUPORTE"}
+
+//            1 mil tem 3 zeros (1.000)
+//            1 centilhão tem 600 zeros (1.000.000 ......)
+
     };
     private String Numeros[][] = {
-            {"zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez",
-                    "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"},
+            {"zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"},
             {"vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"},
-            {"cem", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos",
-                    "setecentos", "oitocentos", "novecentos"}
+            {"cem", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"}
     };
 
-
-    /**
-     * Construtor
-     */
     public NumeroExtenso() {
         nro = new ArrayList();
     }
 
-
-    /**
-     * Construtor
-     *
-     * @param dec valor para colocar por extenso
-     */
     public NumeroExtenso(BigDecimal dec) {
         this();
-        setNumber(dec);
+        setNumero(dec);
     }
 
-
-    /**
-     * Constructor for the Extenso object
-     *
-     * @param dec valor para colocar por extenso
-     */
     public NumeroExtenso(double dec) {
         this();
-        setNumber(dec);
+        setNumero(dec);
     }
 
-
-    /**
-     * Sets the Number attribute of the Extenso object
-     *
-     * @param dec The new Number value
-     */
-    public void setNumber(BigDecimal dec) {
+    public void setNumero(BigDecimal dec) {
         // Converte para inteiro arredondando os centavos
         num = dec
                 .setScale(2, BigDecimal.ROUND_HALF_UP)
@@ -81,22 +78,19 @@ public class NumeroExtenso {
             nro.add(new Integer(0));
         } else {
             // Adiciona centavos
-            addRemainder(100);
+            adicionarRestante(100);
 
             // Adiciona grupos de 1000
             while (!num.equals(BigInteger.ZERO)) {
-                addRemainder(1000);
+                adicionarRestante(1000);
             }
         }
     }
 
-    public void setNumber(double dec) {
-        setNumber(new BigDecimal(dec));
+    public void setNumero(double dec) {
+        setNumero(new BigDecimal(dec));
     }
 
-    /**
-     * Description of the Method
-     */
     public void show() {
         Iterator valores = nro.iterator();
 
@@ -105,13 +99,6 @@ public class NumeroExtenso {
         }
         System.out.println(toString());
     }
-
-
-    /**
-     * Description of the Method
-     *
-     * @return Description of the Returned Value
-     */
 
     public String toString() {
         StringBuffer buf = new StringBuffer();
@@ -187,12 +174,7 @@ public class NumeroExtenso {
         return false;
     }
 
-    /**
-     * Adds a feature to the Remainder attribute of the Extenso object
-     *
-     * @param divisor The feature to be added to the Remainder attribute
-     */
-    private void addRemainder(int divisor) {
+    private void adicionarRestante(int divisor) {
         // Encontra newNum[0] = num modulo divisor, newNum[1] = num dividido divisor
         BigInteger[] newNum = num.divideAndRemainder(BigInteger.valueOf(divisor));
 
@@ -203,40 +185,19 @@ public class NumeroExtenso {
         num = newNum[0];
     }
 
-
-    /**
-     * Description of the Method
-     *
-     * @param ps Description of Parameter
-     * @return Description of the Returned Value
-     */
     private boolean temMaisGrupos(int ps) {
         for (; ps > 0; ps--) {
             if (((Integer) nro.get(ps)).intValue() != 0) {
                 return true;
             }
         }
-
         return false;
     }
 
-
-    /**
-     * Description of the Method
-     *
-     * @param ps Description of Parameter
-     * @return Description of the Returned Value
-     */
     private boolean ehUltimoGrupo(int ps) {
         return (ps > 0) && ((Integer) nro.get(ps)).intValue() != 0 && !temMaisGrupos(ps - 1);
     }
 
-
-    /**
-     * Description of the Method
-     *
-     * @return Description of the Returned Value
-     */
     private boolean ehUnicoGrupo() {
         if (nro.size() <= 3)
             return false;
@@ -253,19 +214,12 @@ public class NumeroExtenso {
         return true;
     }
 
-    boolean ehGrupoZero(int ps) {
+    private boolean ehGrupoZero(int ps) {
         if (ps <= 0 || ps >= nro.size())
             return true;
         return ((Integer) nro.get(ps)).intValue() == 0;
     }
 
-    /**
-     * Description of the Method
-     *
-     * @param numero Description of Parameter
-     * @param escala Description of Parameter
-     * @return Description of the Returned Value
-     */
     private String numToString(int numero, int escala) {
         int unidade = (numero % 10);
         int dezena = (numero % 100); //* nao pode dividir por 10 pois verifica de 0..19
