@@ -17,9 +17,9 @@ import java.io.UnsupportedEncodingException;
 public class CustomizedRequestLoggingFilter extends AbstractRequestLoggingFilter {
 
     public CustomizedRequestLoggingFilter() {
-        setIncludeClientInfo(true);
+//        setIncludeClientInfo(true);
         setIncludeQueryString(true);
-        setIncludeHeaders(true);
+//        setIncludeHeaders(true);
         setIncludePayload(true);
         setMaxPayloadLength(50000);
 
